@@ -16,7 +16,7 @@ def main():
 
     start = time.time()
     # Gets all the search pages
-    for i in range(10): # Takes 0.3 seconds per request, set to 9999
+    for i in range(1): # Takes 0.3 seconds per request, set to 9999
         try:
             page = requests.get(f"https://www.gov.uk/api/search.json?q=boris+johnson&filter_detailed_format=speech&start={i}&fields=description&fields=link")
             search_pages.append(page.json())
@@ -38,8 +38,25 @@ def main():
         speech = requests.get(f"https://www.gov.uk{link}")
         speech_pages_raw.append(speech.text)
     
-    print(speech_pages_raw)
+    #print(speech_pages_raw)
     print(time.time()-start)
+    
+    
+    speeches = []
+    
+    for speech_page in speech_pages_raw:
+        soup = BeautifulSoup(speech_page, 'html.parser')
+        print(soup.find_all(["class","govspeak"]))
+        break
+    # TODO:
+    # GET SPEECHES CLEANED - class=govspeak is where it starts
+    # GET LINK TO YT VIDEO
+    # AI TO FIND WHEN SAID?
+    # CHOOSE PERSON TO SEARCH FOR
+    # START SEARCHING FOR LYRICS AND LOCATION IN SPEECH? - ALSO TICK OFF LYRICS AS OBTAINED
+    # DISPALY THAT ALL  -IN A FILE
+    # OFFER CHANCES TO GET ALL USAGES OF A WORD IF YOU DONT LIKE IT
+    
     # Get all speeches individually
     
     
