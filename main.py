@@ -42,12 +42,24 @@ def main():
     print(time.time()-start)
     
     
-    speeches = []
+    html_speeches = []
+    speeches=[]
     
+    # Gets the text of the sppeches - Need to link to a yt video
     for speech_page in speech_pages_raw:
         soup = BeautifulSoup(speech_page, 'html.parser')
-        print(soup.find_all(["class","govspeak"]))
-        break
+        html_speech = soup.find_all(class_="govspeak")
+        this_speech = []
+        print(soup.find_all("a", class_="govuk-link"))
+        for line in html_speech:
+            #print(line.get_text())
+            this_speech.append(line.get_text().split("\n"))
+            
+        # print(this_speech)
+        speeches.append(this_speech)
+
+    
+    #print(speeches)
     # TODO:
     # GET SPEECHES CLEANED - class=govspeak is where it starts
     # GET LINK TO YT VIDEO
