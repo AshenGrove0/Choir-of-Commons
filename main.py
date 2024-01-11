@@ -51,6 +51,7 @@ def main():
         html_speech = soup.find_all(class_="govspeak")
         this_speech = []
         print(soup.find_all("a", class_="govuk-link"))
+        # ge all links and then check list for youtu.be
         for line in html_speech:
             #print(line.get_text())
             this_speech.append(line.get_text().split("\n"))
