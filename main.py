@@ -17,6 +17,7 @@ def main():
     start = time.time()
     # Gets all the search pages
     for i in range(1): # Takes 0.3 seconds per request, set to 9999
+        # could do in parallel for speed?
         try:
             page = requests.get(f"https://www.gov.uk/api/search.json?q=boris+johnson&filter_detailed_format=speech&start={i}&fields=description&fields=link")
             search_pages.append(page.json())
